@@ -38,6 +38,12 @@ class App extends Component {
     }
   } 
 
+  filterProducts = (list, idCheck) => {
+    list.filter(product => {
+      return product.id === idCheck
+    })
+  }
+
   selecdedProduct = (e) => {
     e.preventDefault()
     //add filter function here to graba all the 'new' information and then add to setState
@@ -52,7 +58,7 @@ class App extends Component {
     e.preventDefault()
     let currentList = this.state.cartItemsList
     let newItem = {
-      // id: this.cartItemsList.length, 
+      id: /*add id somehow */'', 
       product: {
         id: this.state.newId, 
         name: this.state.newName, 
@@ -75,7 +81,7 @@ class App extends Component {
         <CartItems cart={cartItemsList} />
         <form>
             <label for="quantity">Quantity</label>
-            <input type="number" class="form-control" id="quantity" placeholder="Choose a quantity"/>
+            <input type="number" className="form-control" id="quantity" placeholder="Choose a quantity"/>
             <label for="products">Products</label>
             <select onChange={this.selecdedProduct} className="form-control col-10" id="products">
                 <option value = '' disabled>Please Select A Product</option>
