@@ -43,7 +43,7 @@ class App extends Component {
           <Header />
         </header>
         <CartItems cart={this.state.cartItemsList} />
-        <AddItem />
+        <AddItem cartList={this.state.cartItemsList}/>
         <CartFooter year="2018" />
       </div>
     );

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import CartItem from './cartItem'
 class AddItem extends Component{
 
     constructor(props){
@@ -23,18 +23,36 @@ class AddItem extends Component{
                 priceInCents: null
             }, 
             quantity: null
-        }    
+        }   
     }
     
+    submitButton = (e) => {
+        e.preventDefault()
+        let currentList = this.props.cartList
+        let newItem = {id: this.state.id ,product: this.state.product, quantity: this.state.quantity }
+        // console.log('length = ',this.props.cartList.length)
+        // console.log(currentList)
+        currentList.push(newItem)
+    }
+
+    selectQuantity = (e) => {
+        e.preventDefault()
+        this.setState({quantity: Number(e.target.value)})
+    }
+
     showState = (e) => {
         e.preventDefault()
-        console.log(this.state.product)
+        console.log('The new id will be:',this.state.id) 
+        console.log('the product to add is:',this.state.product)
+        console.log('the quantity is:',this.state.quantity)
+        console.log('the cartItemList:',this.props.cartList)
     }
     setProduct = (e) => {
         let doIt = this.state.products.filter(product => {
             return product.id == e.target.value
         })
-        this.setState({product: doIt[0]})  
+        this.setState({product: doIt[0],
+        id: this.props.cartList.length + 1}) 
     }
 
     addItem = (arr) => {
@@ -49,11 +67,11 @@ class AddItem extends Component{
         return (
             <form>
             <label for="quantity">Quantity</label>
-            <input type="number" className="form-control" id="quantity" placeholder="Choose a quantity"/>
+            <input onChange={this.selectQuantity} type="number" className="form-control" id="quantity" placeholder="Choose a quantity"/>
             <label for="products">Products</label>
             <div>
             <div>
-                <button onClick={this.showState}>Show this.state.product</button>
+                <button onClick={this.showState}>console.log all of my stuff</button>
             </div>
             <div>
                 <select onChange={this.setProduct} className="form-control col-10" id="products">
