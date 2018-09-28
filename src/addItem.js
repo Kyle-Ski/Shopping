@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class AddItem extends Component{
 
     constructor(props){
-        super(props),
+        super(props)
         this.state = {
             products: [
                 { id: 40, name: 'Mediocre Iron Watch', priceInCents: 399 },
@@ -26,25 +26,15 @@ class AddItem extends Component{
         }    
     }
     
-    grabId = (idCheck) => {
-        return this.state.products.filter(product => {
-            return product.id === idCheck
-        })
-        .map(key => key.id)
-    }
-
-    selecdedProduct = (e) => {
+    showState = (e) => {
         e.preventDefault()
-        let newId = this.filterProducts(this.state.products,e.target.value).map(key => key.id).join()
-        let newName = this.filterProducts(this.state.products,e.target.value).map(key => key.name).join()
-        let newPriceInCents = this.filterProducts(this.state.products,e.target.value).map(key => key.priceInCents).join()
-        
-        this.setState({product: {
-            id: newId,
-            name: newName,
-            priceInCents: newPriceInCents
-        }})
-        console.log(this.filterProducts(this.state.products,e.target.value))
+        console.log(this.state.product)
+    }
+    setProduct = (e) => {
+        let doIt = this.state.products.filter(product => {
+            return product.id == e.target.value
+        })
+        this.setState({product: doIt[0]})  
     }
 
     addItem = (arr) => {
@@ -55,17 +45,25 @@ class AddItem extends Component{
             })        
     }
 
-    filterProducts = (e) => {
-        this.grabId(e.target.value)
-            console.log(this.grabId(e.target.value))
-            //setState to values
-        }
     render(){
         return (
-            <select onChange={this.filterProducts} className="form-control col-10" id="products">
-                <option value = '' disabled>Please Select A Product</option>
-                {this.addItem(this.state.products)}
-            </select>
+            <form>
+            <label for="quantity">Quantity</label>
+            <input type="number" className="form-control" id="quantity" placeholder="Choose a quantity"/>
+            <label for="products">Products</label>
+            <div>
+            <div>
+                <button onClick={this.showState}>Show this.state.product</button>
+            </div>
+            <div>
+                <select onChange={this.setProduct} className="form-control col-10" id="products">
+                    <option value = '' disabled>Please Select A Product</option>
+                    {this.addItem(this.state.products)}
+                </select>
+            </div>
+            </div>
+            <button onClick={this.submitButton}>Submit</button>
+        </form>
 
         )
     }
