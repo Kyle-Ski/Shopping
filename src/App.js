@@ -1,25 +1,20 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Header from './header';
 import CartFooter from './cartFooter';
 import CartItems from './cartItems';
 import AddItem from './addItem';
-import Form from './form'
 import cartItemsList from './cartItemsList'
 
-const checkProducts = (products) => {
-  return products.filter(product => {
-    return 
-  })
-}
+
 
 class App extends Component {
 
   constructor(props){
     super(props)
     this.state = {
-      products:[
+      
+      products : [
         { id: 40, name: 'Mediocre Iron Watch', priceInCents: 399 },
         { id: 41, name: 'Heavy Duty Concrete Plate', priceInCents: 499 },
         { id: 42, name: 'Intelligent Paper Knife', priceInCents: 1999 },
@@ -31,27 +26,37 @@ class App extends Component {
         { id: 48, name: 'Awesome Leather Shoes', priceInCents: 3990 },
       ],
       cartItemsList: cartItemsList,
-      newId : '',
-      newName: '',
-      newPriceInCents: '',
-      newQuantity: ''
+      
+        id: null, 
+        product: {
+          id: null, 
+          name: '', 
+          priceInCents: null
+        }, 
+        quantity: null
+      
     }
   } 
 
   filterProducts = (list, idCheck) => {
-    list.filter(product => {
+    return list.filter(product => {
       return product.id === idCheck
     })
   }
 
   selecdedProduct = (e) => {
     e.preventDefault()
+    let newId = this.filterProducts(this.state.products,e.target.value).map(key => key.id).join()
+    let newName = this.filterProducts(this.state.products,e.target.value).map(key => key.name).join()
+    let newPriceInCents = this.filterProducts(this.state.products,e.target.value).map(key => key.priceInCents).join()
     //add filter function here to graba all the 'new' information and then add to setState
-    this.setState({newId: e.target.value.id, 
-      newName: e.target.value.name, 
-      newPriceInCents: e.target.value.priceInCents
-    })
-    console.log(e.target.value)
+    
+    this.setState({product: {
+      id: newId,
+      name: newName,
+      priceInCents: newPriceInCents
+    }})
+    console.log(this.filterProducts(this.state.products,e.target.value))
   }
   
   submitButton = (e) => {
@@ -60,15 +65,16 @@ class App extends Component {
     let newItem = {
       id: /*add id somehow */'', 
       product: {
-        id: this.state.newId, 
-        name: this.state.newName, 
-        priceInCents: this.state.newPriceInCents
+        id: this.state.id, 
+        name: this.state.name, 
+        priceInCents: this.state.priceInCents
       }, 
       quantity: this.state.newQuantity
     }
     currentList.push(newItem)
     this.setState({cartItemsList: currentList})
     console.log(newItem)
+    console.log(this.state.product)
   }
 
   render() {
@@ -78,15 +84,12 @@ class App extends Component {
         <header className="App-header">
           <Header />
         </header>
-        <CartItems cart={cartItemsList} />
+        <CartItems cart={this.state.cartItemsList} />
         <form>
             <label for="quantity">Quantity</label>
             <input type="number" className="form-control" id="quantity" placeholder="Choose a quantity"/>
             <label for="products">Products</label>
-            <select onChange={this.selecdedProduct} className="form-control col-10" id="products">
-                <option value = '' disabled>Please Select A Product</option>
-                <AddItem list={this.state.products}/>
-            </select>
+                <AddItem />
             <button onClick={this.submitButton}>Submit</button>
         </form>
         <CartFooter year="2018" />
