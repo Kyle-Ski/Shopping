@@ -33,12 +33,10 @@ class AddItem extends Component{
     
     submitButton = (e) => {
         e.preventDefault()
-        let currentList = this.state.CartItemsList
+        let currentList = this.state.cartItemsList
         let newItem = {id: this.state.id ,product: this.state.product, quantity: this.state.quantity }
-        // console.log('length = ',this.props.cartList.length)
-        // console.log(currentList)
         this.setState({
-            cartItemsList: this.state.cartItemsList.concat({id: this.state.id ,product: this.state.product, quantity: this.state.quantity })
+            cartItemsList: currentList.concat(newItem)
         })
     }
 
