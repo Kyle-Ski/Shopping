@@ -38,13 +38,6 @@ class AddItem extends Component{
         this.setState({
             cartItemsList: currentList.concat(newItem)
         })
-        const getTotalPrice = (list) => {
-            this.setState({total: list.reduce((accum, current) => {
-                    return accum + current.product.priceInCents
-                },0)
-            })
-        }
-        getTotalPrice(currentList)
     }
 
     selectQuantity = (e) => {
@@ -54,7 +47,7 @@ class AddItem extends Component{
 
     showState = (e) => {
         e.preventDefault()
-        console.log('getTotal', this.getTotalPrice)
+        console.log('getTotal', this.state.total)
         console.log('The new id will be:',this.state.id) 
         console.log('the product to add is:',this.state.product)
         console.log('the quantity is:',this.state.quantity)
@@ -77,10 +70,13 @@ class AddItem extends Component{
     }
 
     render(){
+        let total = this.state.cartItemsList.reduce((accum, current) => {
+            return accum + current.product.priceInCents
+        },0)
         return (
         <div>
             <CartItems cart={this.state.cartItemsList}/>
-            <h3>Total Price: ${this.state.total}</h3>
+            <h3>Total Price: ${total}</h3>
             <form>
                 <label htmlFor="quantity">Quantity</label>
                 <input onChange={this.selectQuantity} type="number" className="form-control" id="quantity" placeholder="Choose a quantity"/>
