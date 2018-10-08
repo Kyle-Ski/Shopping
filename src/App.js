@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './header';
 import CartFooter from './cartFooter';
-import CartItems from './cartItems';
 import AddItem from './addItem';
 
 
