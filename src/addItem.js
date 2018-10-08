@@ -21,12 +21,15 @@ class AddItem extends Component{
             ],
             id: null, 
             product: {
+                id: null,
+                name: '',
+                priceInCents: null
             }, 
             quantity: null,
             cartItemsList:[
-                { id: 1, product: { id: 40, name: 'Mediocre Iron Watch', priceInCents: 399 }, quantity: 1 },
-                { id: 2, product: { id: 41, name: 'Heavy Duty Concrete Plate', priceInCents: 499 }, quantity: 2 },
-                { id: 3, product: { id: 42, name: 'Intelligent Paper Knife', priceInCents: 1999 }, quantity: 1 },
+                { id: 1, product: { id: 40, name: 'Mediocre Iron Watch', priceInCents: 3.99 }, quantity: 1 },
+                { id: 2, product: { id: 41, name: 'Heavy Duty Concrete Plate', priceInCents: 4.99 }, quantity: 2 },
+                { id: 3, product: { id: 42, name: 'Intelligent Paper Knife', priceInCents: 19.99 }, quantity: 1 },
             ]       
         }   
     }
@@ -57,7 +60,8 @@ class AddItem extends Component{
         let doIt = this.state.products.filter(product => {
             return product.id === Number(e.target.value)
         })
-        this.setState({product: doIt[0],
+        console.log(doIt[0].priceInCents/100)
+        this.setState({product:{id:doIt[0].id, name:doIt[0].name, priceInCents:(doIt[0].priceInCents/100)*this.state.quantity},
         id: this.state.cartItemsList.length + 1}) 
     }
 
@@ -70,13 +74,13 @@ class AddItem extends Component{
     }
 
     render(){
-        let total = this.state.cartItemsList.reduce((accum, current) => {
+        let total = (this.state.cartItemsList.reduce((accum, current) => {
             return accum + current.product.priceInCents
-        },0)
+        },0))
         return (
         <div>
             <CartItems cart={this.state.cartItemsList}/>
-            <h3>Total Price: ${total}</h3>
+            <h3>Total Price: ${total.toFixed(2)}</h3>
             <form>
                 <label htmlFor="quantity">Quantity</label>
                 <input onChange={this.selectQuantity} type="number" className="form-control" id="quantity" placeholder="Choose a quantity"/>
