@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 const CartFooter = (props) => {
     return (
         <nav className="navbar navbar-dark bg-dark">
-            <a className="navbar-brand" href="#">&copy; {props.year}</a>
+            <a className="navbar-brand" href="">&copy; {props.year}</a>
         </nav>
     )
 }

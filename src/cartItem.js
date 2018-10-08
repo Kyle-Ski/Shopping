@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 const CartItem = (props) => {
-    return props.cart.map(item => {
+    return props.cart.map((item,i) => {
             return (
-                <div className="list-group-item">
+                <div key= {i} className="list-group-item">
                     <div className="row">
                         <div className="col-md-8">{item.product.name}</div>
                         <div className="col-md-2">${item.product.priceInCents}</div>

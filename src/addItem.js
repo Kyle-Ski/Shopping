@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import CartItems from './cartItems'
-class AddItem extends Component{
 
+
+class AddItem extends Component{
+    
     constructor(props){
         super(props)
         this.state = {
+            total: 0,
             products: [
                 { id: 40, name: 'Mediocre Iron Watch', priceInCents: 399 },
                 { id: 41, name: 'Heavy Duty Concrete Plate', priceInCents: 499 },
@@ -18,9 +21,6 @@ class AddItem extends Component{
             ],
             id: null, 
             product: {
-                id: null, 
-                name: '', 
-                priceInCents: null
             }, 
             quantity: null,
             cartItemsList:[
@@ -38,6 +38,13 @@ class AddItem extends Component{
         this.setState({
             cartItemsList: currentList.concat(newItem)
         })
+        const getTotalPrice = (list) => {
+            this.setState({total: list.reduce((accum, current) => {
+                    return accum + current.product.priceInCents
+                },0)
+            })
+        }
+        getTotalPrice(currentList)
     }
 
     selectQuantity = (e) => {
@@ -47,6 +54,7 @@ class AddItem extends Component{
 
     showState = (e) => {
         e.preventDefault()
+        console.log('getTotal', this.getTotalPrice)
         console.log('The new id will be:',this.state.id) 
         console.log('the product to add is:',this.state.product)
         console.log('the quantity is:',this.state.quantity)
@@ -54,7 +62,7 @@ class AddItem extends Component{
     }
     setProduct = (e) => {
         let doIt = this.state.products.filter(product => {
-            return product.id == e.target.value
+            return product.id === Number(e.target.value)
         })
         this.setState({product: doIt[0],
         id: this.state.cartItemsList.length + 1}) 
@@ -63,7 +71,7 @@ class AddItem extends Component{
     addItem = (arr) => {
         return arr.map(item => {
                 return(
-                    <option value={item.id}>{item.name}</option>
+                    <option key={item.name} value={item.id}>{item.name}</option>
                 )
             })        
     }
@@ -72,10 +80,11 @@ class AddItem extends Component{
         return (
         <div>
             <CartItems cart={this.state.cartItemsList}/>
+            <h3>Total Price: ${this.state.total}</h3>
             <form>
-                <label for="quantity">Quantity</label>
+                <label htmlFor="quantity">Quantity</label>
                 <input onChange={this.selectQuantity} type="number" className="form-control" id="quantity" placeholder="Choose a quantity"/>
-                <label for="products">Products</label>
+                <label htmlFor="products">Products</label>
                 <div>
                 <div>
                     <button onClick={this.showState}>console.log all of my stuff</button>
