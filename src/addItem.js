@@ -70,29 +70,25 @@ class AddItem extends Component{
 
     render(){
         return (
-            <div>
-            <div>
-                <CartItems cart={this.state.cartItemsList}/>
-            </div>
-            <div>
-                <form>
-                    <label for="quantity">Quantity</label>
-                    <input onChange={this.selectQuantity} type="number" className="form-control" id="quantity" placeholder="Choose a quantity"/>
-                    <label for="products">Products</label>
-                    <div>
-                    <div>
-                        <button onClick={this.showState}>console.log all of my stuff</button>
-                    </div>
-                    <div>
-                        <select onChange={this.setProduct} className="form-control col-10" id="products">
-                            <option value = '' disabled>Please Select A Product</option>
-                            {this.addItem(this.state.products)}
-                        </select>
-                    </div>
-                    </div>
-                    <button onClick={this.submitButton}>Submit</button>
-                </form>
-        </div>
+        <div>
+            <CartItems cart={this.state.cartItemsList}/>
+            <form>
+                <label for="quantity">Quantity</label>
+                <input onChange={this.selectQuantity} type="number" className="form-control" id="quantity" placeholder="Choose a quantity"/>
+                <label for="products">Products</label>
+                <div>
+                <div>
+                    <button onClick={this.showState}>console.log all of my stuff</button>
+                </div>
+                <div>
+                    <select onChange={this.setProduct} className="form-control col-10" id="products">
+                        <option value = '' disabled>Please Select A Product</option>
+                        {this.addItem(this.state.products)}
+                    </select>
+                </div>
+                </div>
+                <button onClick={this.submitButton}>Submit</button>
+            </form>
         </div>
         )
     }
