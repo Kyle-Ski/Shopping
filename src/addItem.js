@@ -86,9 +86,9 @@ class AddItem extends Component{
                 <input onChange={this.selectQuantity} type="number" className="form-control" id="quantity" placeholder="Choose a quantity"/>
                 <label htmlFor="products">Products</label>
                 <div>
-                <div>
+                {/* <div>
                     <button onClick={this.showState}>console.log all of my stuff</button>
-                </div>
+                </div> */}
                 <div>
                     <select onChange={this.setProduct} className="form-control col-10" id="products">
                         <option value = '' disabled>Please Select A Product</option>
@@ -96,7 +96,7 @@ class AddItem extends Component{
                     </select>
                 </div>
                 </div>
-                <button onClick={this.submitButton}>Submit</button>
+                <button onClick={this.submitButton} className="btn btn-primary">Submit</button>
             </form>
         </div>
         )
