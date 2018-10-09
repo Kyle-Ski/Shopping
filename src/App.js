@@ -12,7 +12,6 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-        total: 0,
         products: [
             { id: 40, name: 'Mediocre Iron Watch', priceInCents: 399 },
             { id: 41, name: 'Heavy Duty Concrete Plate', priceInCents: 499 },
@@ -55,7 +54,6 @@ selectQuantity = (e) => {
 
 showState = (e) => {
   e.preventDefault()
-  console.log('getTotal', this.state.total)
   console.log('The new id will be:',this.state.id) 
   console.log('the product to add is:',this.state.product)
   console.log('the quantity is:',this.state.quantity)
