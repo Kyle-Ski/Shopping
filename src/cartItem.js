@@ -1,6 +1,6 @@
 import React from 'react';
-const CartItem = (props) => {
-    return props.cart.map((item,i) => {
+const CartItem = ({cartItemsList}) => {
+    return cartItemsList.map((item,i) => {
             return (
                 <div key= {i} className="list-group-item">
                     <div className="row">
