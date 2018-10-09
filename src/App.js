@@ -68,13 +68,6 @@ setProduct = (e) => {
   this.setState({product:{id:selectedProduct[0].id, name:selectedProduct[0].name, priceInCents:(selectedProduct[0].priceInCents/100)*this.state.quantity},
   id: this.state.cartItemsList.length + 1}) 
 }
-addItem = (arr) => {
-  return arr.map(item => {
-          return(
-              <option key={item.name} value={item.id}>{item.name}</option>
-          )
-      })        
-}
 
   render() {
     let total = (this.state.cartItemsList.reduce((accum, current) => {
@@ -90,12 +83,6 @@ addItem = (arr) => {
         <AddItem
           products={this.state.products}
           cartItemsList={this.state.cartItemsList}
-          quantity={this.state.quantity}
-          id={this.state.id}
-          product={this.state.product}
-          productId={this.state.product.id}
-          productName={this.state.product.name}
-          productPrice={this.state.product.priceInCents}
           submit={this.submitButton}
           selectQuantity={this.selectQuantity}
           showState={this.showState}
