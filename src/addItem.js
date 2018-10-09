@@ -60,7 +60,6 @@ class AddItem extends Component{
         let doIt = this.state.products.filter(product => {
             return product.id === Number(e.target.value)
         })
-        console.log(doIt[0].priceInCents/100)
         this.setState({product:{id:doIt[0].id, name:doIt[0].name, priceInCents:(doIt[0].priceInCents/100)*this.state.quantity},
         id: this.state.cartItemsList.length + 1}) 
     }
@@ -87,7 +86,7 @@ class AddItem extends Component{
                 <label htmlFor="products">Products</label>
                 <div>
                 <div>
-                    <button onClick={this.showState}>console.log all of my stuff</button>
+                    {/* <button onClick={this.showState}>console.log all of my stuff</button> */}
                 </div>
                 <div>
                     <select onChange={this.setProduct} className="form-control col-10" id="products">
