@@ -60,11 +60,15 @@ showState = (e) => {
   console.log('the cartItemList:',this.state.cartItemsList)
 }
 setProduct = (e) => {
-  let selectedProduct = this.state.products.filter(product => {
-      return product.id === Number(e.target.value)
-  })
-  this.setState({product:{id:selectedProduct[0].id, name:selectedProduct[0].name, priceInCents:(selectedProduct[0].priceInCents/100)*this.state.quantity},
-  id: this.state.cartItemsList.length + 1}) 
+  if (this.state.quantity === null){
+    alert("Please Enter a Quantity First")
+  } else {
+    let selectedProduct = this.state.products.filter(product => {
+        return product.id === Number(e.target.value)
+    })
+    this.setState({product:{id:selectedProduct[0].id, name:selectedProduct[0].name, priceInCents:(selectedProduct[0].priceInCents/100)*this.state.quantity},
+    id: this.state.cartItemsList.length + 1}) 
+}
 }
 
   render() {
