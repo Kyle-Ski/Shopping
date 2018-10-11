@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import Header from './header';
-import CartFooter from './cartFooter';
-import AddItem from './addItem';
-import CartItems from './cartItems'
+import Header from './Header';
+import CartFooter from './CartFooter';
+import AddItem from './AddItem';
+import CartItems from './CartItems'
 
 
 

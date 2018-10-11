@@ -1,5 +1,5 @@
 import React from 'react';
-import CartItem from './cartItem';
+import CartItem from './CartItem';
 const CartItems = (props) => {
     return (
         <div className="container">
