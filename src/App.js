@@ -77,9 +77,7 @@ setProduct = (e) => {
     },0))
     return (
       <div className="App">
-        <header className="App-header">
-          <Header />
-        </header>
+        <Header />
         <CartItems cartItemsList={this.state.cartItemsList}/>
         <h3>Total Price: ${total.toFixed(2)}</h3>
         <AddItem
